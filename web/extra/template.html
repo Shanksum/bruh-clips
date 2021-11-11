@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Do not index clip pages in search machines -->
+    <meta name="robots" content="noindex">
+
+    <!-- Favicon Support -->
+    <link rel="apple-touch-icon" sizes="120x120" href="../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../favicon/site.webmanifest">
+    <link rel="mask-icon" href="../favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="../favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-config" content="../favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+
+    <!-- Meta tags for social share -->
+    <meta property="og:title" content="Check out my clip: {%videoName%}"/>
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{%pageLink%}" />
+    <meta property="og:description" content="This clip expires on: {%expiryDate%}. You better watch it before it's gone!" />
+    <meta property="og:video" content="{%videoFileLink%}" />
+    <meta property="og:video:secure_url" content="{%videoFileLink%}" />
+    <meta property="og:video:type" content="video/mp4" />
+    <meta property="og:video:width" content="1280" />
+    <meta property="og:video:height" content="720" />
+    <meta property="og:image" content="{%thumbLink%}" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="twitter:image" content="{%thumbLink%}" />
+    <meta content="summary_large_image" name="twitter:card"/>
+
+    <!-- Dark Mode Option Meta tag -->
+    <meta name="color-scheme" content="dark light">
+
+    <title>bruh-clips | {%videoName%}</title>
+</head>
+
+<body>
+    <div class="d-grid gap-3 container">
+        <div class="row">
+            <div class="col d-flex justify-content-center pt-3">
+                <a href="../index">
+                    <img src="../images/logo.png" alt="Bruh Clips" class="img-fluid" />
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col d-flex justify-content-start">
+                <h1 style="margin: 0;">{%videoName%}</h1>
+            </div>
+            <div class="col d-flex align-self-center justify-content-end">
+                <a class="btn" id="themeButton"><i class="bi bi-moon-stars-fill" aria-label="Dark-Mode"></i></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                {%insertFile%}
+            </div>
+        </div>
+        <div class="row">
+            <div class="control-buttons col d-flex justify-content-center">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="link" aria-label="Link to this page"
+                        aria-describedby="button-ctc" value="{%pageLink%}" readonly>
+                    <button class="btn btn-danger" type="button" id="button-ctc" onclick="copyToClipboard()">
+                        <i class="bi bi-clipboard-plus"></i> Copy to Clipboard
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                {%insertButton%}
+            </div>
+        </div>
+        <div class="row">
+            <p style="text-align: center; font-weight: bold;">Expires (+/- 1h): {%expiryDate%}</p>
+        </div>
+    </div>
+
+    <div class="d-grid pb-3 pt-5 gap-3 container" id="bottom">
+        <footer> 
+            <div class="row">
+                <div class="col" style="text-align: right;">
+                    <a class="footer-link" href="../imprint" target="_blank">Imprint</a>
+                </div>
+                <div class="col" style="text-align: left;">
+                    <a class="footer-link" href="../privacy" target="_blank">Privacy</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+
+    <!-- Custom Scripts -->
+    <script src="../js/clips.js"></script>
+    <script src="../js/theme.js"></script>
+
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+</body>
+
+</html>

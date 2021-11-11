@@ -1,0 +1,194 @@
+@font-face {
+    font-family: NunitoSans;
+    src: url("../font/NunitoSans-Regular.ttf")
+}
+
+@font-face {
+    font-family: NunitoSans;
+    font-weight: bold;
+    src: url("../font/NunitoSans-Bold.ttf")
+}
+
+@font-face {
+    font-family: NunitoSans;
+    font-style: italic;
+    src: url("../font/NunitoSans-Italic.ttf")
+}
+
+@font-face {
+    font-family: NunitoSans;
+    font-weight: bold;
+    font-style: italic;
+    src: url("../font/NunitoSans-BoldItalic.ttf")
+}
+
+@font-face {
+    font-family: NunitoSans;
+    font-weight: 900;
+    src: url("../font/NunitoSans-Black.ttf")
+}
+
+@font-face {
+    font-family: NunitoSans;
+    font-weight: 900;
+    font-style: italic;
+    src: url("../font/NunitoSans-BlackItalic.ttf")
+}
+
+body {
+    --text-color: #222;
+    --bkg-color: #fff;
+    --info-color: #fff;
+    --info-shadow: rgba(0, 0, 0, .15);
+}
+
+body.dark-mode {
+    --text-color: #eee;
+    --bkg-color: #121212;
+    --info-color: #222;
+    --info-shadow: rgba(255, 255, 255, 0.15);
+}
+
+#drop-area {
+    border: 2px dashed var(--text-color);
+    border-radius: 0;
+    margin-bottom: 1em;
+    padding: 3em 0;
+}
+
+#drop-area.highlight {
+    border-color: #e53935;
+}
+
+@media (prefers-color-scheme: dark) {
+    /* defaults to dark theme */
+    body {
+        --text-color: #eee;
+        --bkg-color: #121212;
+        --info-color: #222;
+        --info-shadow: rgba(255, 255, 255, 0.15);
+    }
+    body.light-mode {
+        --text-color: #222;
+        --bkg-color: #fff;
+        --info-color: #fff;
+        --info-shadow: rgba(0, 0, 0, .15);
+    }
+}
+
+body {
+    font-family: NunitoSans, sans-serif;
+    font-weight: bold;
+    min-height: 98vh;
+    position: relative;
+    background: var(--bkg-color);
+    color: var(--text-color);
+}
+
+/*#bottom {
+    position: absolute;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    width: 100%;
+}*/
+
+/*
+video {
+    min-height: 100%; 
+    min-width: 100%;
+}
+*/
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 2.5rem;
+}
+
+.infoBox {
+    margin: 1em;
+    padding: 1em;
+    flex-shrink: 2;
+    background: var(--info-color);
+}
+
+.shadow {
+    box-shadow: 0 .5rem 1rem var(--info-shadow)!important;
+}
+
+.modal-body, p {
+    font-weight: 400;
+    text-align: justify;
+}
+
+.modal-content {
+    background: var(--bkg-color);
+    border-radius: 0;
+}
+
+.container {
+    max-width: 50%;
+    min-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Smaller than 768px devices */
+
+@media only screen and (max-width: 1200px) {
+    .container {
+        max-width: 100%;
+    }
+}
+
+h1, h2, h5 {
+    font-weight: 900;
+    font-style: italic;
+}
+
+.btn {
+    font-weight: bold;
+    font-style: italic;
+    border-radius: 0;
+}
+
+.btn-danger, .bg-danger {
+    background-color: #e53935;
+}
+
+#themeButton {
+    outline: none;
+    box-shadow: none;
+}
+
+.footer-link {
+    color: var(--text-color);
+}
+
+.footer-link:hover {
+    color: #e53935;
+}
+
+a {
+    color: #e53935;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #bb2d3b;
+}
+
+.bi-sun-fill {
+    color: white;
+}
+
+.form-control {
+    border-radius: 0;
+}

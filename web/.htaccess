@@ -1,0 +1,17 @@
+php_flag  log_errors on
+php_value error_log  php.log
+
+php_value post_max_size 500M
+php_value upload_max_filesize 500M
+
+#ErrorDocument 404 https://bruh-clips.com/404.html
+
+#RewriteEngine on
+#RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
+#RewriteRule ^ /%1 [NC,L,R]
+#RewriteCond %{REQUEST_FILENAME}.html -f
+#RewriteRule ^ %{REQUEST_URI}.html [NC,L]
+
+#RewriteEngine On
+#RewriteRule ^index.html$ / [R=301,L]
+#RewriteRule ^(.*)/index.html$ /$1/ [R=301,L]

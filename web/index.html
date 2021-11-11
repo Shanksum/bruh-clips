@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Favicon Support -->
+    <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-config" content="favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- Meta tags for social share -->
+    <meta property="og:title" content="Share your favorite clips, bruh." />
+    <meta proeprty="og:type" content="website" />
+    <meta property="og:url" content="https://bruh-clips.com" />
+    <meta property="og:description" content="Use bruh-clips.com to share your favorite clips with your friends!" />
+    <meta property="og:image" content="https://bruh-clips.com/images/home.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="twitter:image" content="https://bruh-clips.com/images/home.png" />
+    <meta content="summary_large_image" name="twitter:card" />
+
+    <!-- Dark Mode Option Meta tag -->
+    <meta name="color-scheme" content="dark light">
+
+    <title>bruh-clips</title>
+</head>
+
+<body>
+    <div class="d-grid gap-3 container pb-3">
+        <div class="row">
+            <div class="col d-flex justify-content-center pt-3">
+                <a href="index">
+                    <img src="images/logo.png" alt="Bruh Clips" class="img-fluid" />
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="d-grid container">
+        <div class="row">
+            <div class="col d-flex justify-content-end">
+                <!--<button class="btn btn-danger" id="themeButton"><i class="bi bi-lightbulb-off"></i> Dark-Mode</button>-->
+                <a class="btn" id="themeButton"><i class="bi bi-moon-stars-fill" aria-label="Dark-Mode"></i></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm shadow infoBox">
+                <h2>How does it work?</h2>
+                <ol>
+                    <li>Record a dope clip</li>
+                    <li>Cut out the amazing part</li>
+                    <li>Upload a .mp4 version not larger than 500mb</li>
+                    <li>Send the link to you friends</li>
+                    <li>We delete the clip after two days</li>
+                </ol>
+            </div>
+            <div class="col-sm shadow infoBox">
+                <h2>How can I edit my clip?</h2>
+                <ul>
+                    <li>Use a free video editing tool like <a href="https://shotcut.org/" target="_blank"
+                            rel="norefferer">Shotcut</a> or <a href="https://kdenlive.org/" target="_blank"
+                            rel="norefferer">kdenlive</a></li>
+                    <li>And/or use <a href="https://handbrake.fr/" target="_blank" rel="norefferer">Handbrake</a> to
+                        reduce the
+                        file size or to trim clips</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-grid gap-3 container pb-5 pt-5">
+        <form class="control-buttons" action="" method="post" enctype="multipart/form-data" id="uploadForm">
+            <h2 style="margin-bottom: 0;">Select and Upload clip:</h2>
+            (must be .mp4 and max. 500mb)
+            <div id="drop-area">
+                <div class="row">
+                    <div class="col d-flex justify-content-center">
+                        <input id="fileSelectButton" type="button" class="btn btn-danger"
+                            onclick="document.getElementById('fileToUpload').click()" value="Select or Drop File">
+                        <!--<input id="fileSelectButton" type="button" class="btn btn-danger" value="Select or Drop File" style="pointer-events: none">-->
+                        <!--TODO: Properly style and align the file selction/buttons & use custom validation -->
+                    </div>
+                </div>
+                <div class="row pt-2">
+                    <div class="col d-flex justify-content-center">
+                        <input type="file" accept="video/mp4" class="form-control" name="fileToUpload" id="fileToUpload"
+                            onclick="closeFileToBigAlert()" onchange="checkFile(this.files)" style="max-width: 70%;" required>
+                        <!--<div class="invalid-feedback">You have to select a clip first.</div>-->
+                    </div>
+                </div>
+                <div class="row pt-2">
+                    <div class="col d-flex justify-content-center">
+                        <p id="file-name-info" style="display: none;"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert" style="display: none;"
+                id="fileToBigWarning">
+                <strong>File to big!</strong> The file size limit is 500mb.
+                <button type="button" class="btn-close" onclick="closeFileToBigAlert()" aria-label="Close"></button>
+            </div>
+            <!-- Expiry selection currently not an implemented feature
+            <div class="row pb-2">
+                <div class="col">
+                    <label for="fileExpiration" class="form-label">File Expiration:</label>
+                    <select id="fileExpiration" class="form-select" aria-label="Select Expiry Time" required>
+                        <option value="1">1 Hour</option>
+                        <option value="12">12 Hours</option>
+                        <option value="24">24 Hours</option>
+                        <option value="48">48 Hours</option>
+                    </select>
+                </div>
+            </div>-->
+            <div class="row pb-2">
+                <div class="col">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                        <label class="form-check-label" for="exampleCheck1">I accept the <a href=""
+                                data-bs-toggle="modal" data-bs-target="#tacModal">terms of service</a> and acknowledge
+                            the <a href="privacy" target="_blank">privacy statement</a>.</label>
+                        <!--<div class="invalid-feedback">You must agree before uploading.</div>-->
+                    </div>
+                </div>
+            </div>
+            <div class="row pb-2">
+                <div class="col">
+                    <div class="progress" id="progress-wrapper" style="display: none;">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+                            id="upload-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                            aria-valuemax="100" style="width: 0%;">0%
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pb-2">
+                <div class="col">
+                    <p style="text-align: center; display: none;" id="status"></p>
+                </div>
+            </div>
+            <div class="row pb-2">
+                <div class="col d-flex justify-content-center">
+                    <!--<button type="submit" name="submit" class="btn btn-danger"><i class="bi bi-upload"></i> Upload Clip</button>-->
+                    <button class="btn btn-danger" id="uploadButton"><i class="bi bi-upload"></i> Upload Clip</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Terms and Conditions Modal -->
+    <div class="modal fade" id="tacModal" tabindex="-1" aria-labelledby="tacModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tacModalLabel">Terms of Service</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        The user must be of at least the age of 13, and agrees to not use bruh-clips
+                        for any illegal or unauthorized purposes. The user must agree to comply with local laws
+                        regarding online conduct, and copyright laws. bruh-clips is intended for personal use,
+                        and any business use is strictly prohibited. The user must not use bruh-clips
+                        to violate any laws which include but are not limited to copyright laws.
+                    </p>
+                    <p>
+                        The users uses bruh-clips at his own risk and understands that files uploaded on bruh-clips are
+                        not private, they may be displayed for others to view and download, and he understands and
+                        agrees that bruh-clips cannot be responsible for the content uploaded
+                        on its web site and he nonetheless may be exposed to such materials and that he uses bruh-clips
+                        at his own risk.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-grid pb-3 gap-3 container" id="bottom">
+        <footer>
+            <div class="row">
+                <div class="col" style="text-align: right;">
+                    <a class="footer-link" href="imprint" target="_blank">Imprint</a>
+                </div>
+                <div class="col" style="text-align: left;">
+                    <a class="footer-link" href="privacy" target="_blank">Privacy</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+
+    <!-- Custom Scripts -->
+    <script src="js/home.js"></script>
+    <script src="js/theme.js"></script>
+
+</body>
+
+</html>
