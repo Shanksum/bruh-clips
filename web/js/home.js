@@ -82,7 +82,7 @@ function unhighlight(e) {
 // Event listener on the upload form to trigger in a submit event
 //async function startUpload() {
 document.getElementById("uploadForm").addEventListener("submit", async (event) => {
-    //event.preventDefault();
+    event.preventDefault();
 
     //if(!valid)
         //return

@@ -79,7 +79,7 @@ body.dark-mode {
 body {
     font-family: NunitoSans, sans-serif;
     font-weight: bold;
-    min-height: 98vh;
+    min-height: 95vh;
     position: relative;
     background: var(--bkg-color);
     color: var(--text-color);
@@ -110,6 +110,7 @@ footer {
     margin-left: auto;
     margin-right: auto;
     height: 2.5rem;
+    padding-top: 2em;
 }
 
 .infoBox {
