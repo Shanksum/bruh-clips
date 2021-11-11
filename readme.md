@@ -9,7 +9,7 @@
 Check out the website at [bruh-clips.com](https://bruh-clips.com).
 
  ## Deployment
- Coded in vanilla JavaScript, HTML and PHP, this project does not need any special deployment procedure or dependencies. Just put it all on a webserver and point a domain at it.
+ Coded in vanilla JavaScript, HTML and PHP, this project does not need any special deployment procedure or dependencies. Just put all the content of the "web" folder on a webserver and point a domain at it.
 
  Only the [cron job](cleanup.sh) needs to be configured/started manually.
 
@@ -25,7 +25,9 @@ Check out the website at [bruh-clips.com](https://bruh-clips.com).
 5. The user lands on the new page and can copy the link to share it. Thumbnail and videoname will be used in the link preview on any social media which supports the [Open Graph Protocol](https://ogp.me/).
 6. 48 hours after uploading, the cron job will delete thumbnail, videofile and HTML page from the server. All visitors after that will be redirected to a [404 page](web/404.html).
 
-
  ## ToDos
  1. Create a custom validation for the upload form.
  2. Integrate the possibility to cut/trim a clip before uploading using ffmpeg and server-side rendering.
+ 3. Set up CI/CD for this repository to publish changes directly to [bruh-clips.com](https://bruh-clips.com).
+
+ (not in that order)
