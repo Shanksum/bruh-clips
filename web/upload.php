@@ -134,17 +134,17 @@ $newPage = str_replace("{%thumbLink%}", "https://bruh-clips.com/uploads/$newRand
 $newPage = str_replace("{%videoName%}", $videoName, $newPage);
 
 // Prepare HTML string for insertion & Insert video
-$insertFile = "<video style='width: 100%; height: 100%;' poster='../uploads/$newRandID.jpeg' playsinline='true' controls='true'><source src='../uploads/$newRandID.mp4' type='video/mp4'>Your browser does not support the video tag</video>";
+$insertFile = "<video style='width: 100%; height: 100%;' poster='../uploads/$newRandID.jpeg' playsinline='true' controls='true' preload='auto'><source src='../uploads/$newRandID-0.mp4' type='video/mp4'>Your browser does not support the video tag</video>";
 $newPage = str_replace("{%insertFile%}", $insertFile, $newPage);
 
 // Insert Link for Clipboard Copy
 $newPage = str_replace("{%pageLink%}", "https://bruh-clips.com/clips/$newRandID", $newPage);
 
 // Insert video file link for meta tags
-$newPage = str_replace("{%videoFileLink%}", "https://bruh-clips.com/uploads/$newRandID.mp4", $newPage);
+$newPage = str_replace("{%videoFileLink%}", "https://bruh-clips.com/uploads/$newRandID-0.mp4", $newPage);
 
 // Insert Download Button
-$downloadButton = "<a class='btn btn-danger' href='../uploads/$newRandID.mp4' role='button' download='$fileName'><i class='bi bi-download'></i> Download Clip</a>";
+$downloadButton = "<a class='btn btn-danger' href='../uploads/$newRandID-0.mp4' role='button' download='$fileName'><i class='bi bi-download'></i> Download Clip</a>";
 $newPage = str_replace("{%insertButton%}", $downloadButton, $newPage);
 
 // Calculate page expiry and insert
@@ -156,6 +156,14 @@ $newPage = str_replace("{%expiryDate%}", date('d. F Y H:00 e', $expiryDate), $ne
 if (file_put_contents("clips/$newRandID.html", $newPage) && $uploadOk == 1) {
   // Close DB connection
   //$conn->close();
+
+  //shell_exec("ffmpeg -y public_html/uploads/$newRandID.mp4 public_html/uploads/$newRandID.mp4 </dev/null >/dev/null 2>/ffmpeg.log &");
+  //shell_exec("/usr/home/bruhnc/ffmpeg -y -i uploads/$newRandID.mp4 uploads/$newRandID-0.mp4 </dev/null >/dev/null 2>/ffmpeg.log &");
+  //shell_exec("/usr/home/bruhnc/ffmpeg -y -movflags +faststart -i uploads/$newRandID.mp4 uploads/$newRandID-0.mp4 >/dev/null 2>ffmpeg.log &");
+  //echo shell_exec("/usr/home/bruhnc/qt-faststart -y ../uploads/$newRandID.mp4 ../uploads/$newRandID.mp4 2>&1");
+
+  shell_exec("/usr/home/bruhnc/ffmpeg -y -i uploads/$newRandID.mp4 -c copy -map 0 -movflags +faststart uploads/$newRandID-0.mp4 > /dev/null 2> ffmpeg.log");
+  unlink("uploads/$newRandID.mp4");
 
   // Redirect to new page
   header('Content-Type: application/json');

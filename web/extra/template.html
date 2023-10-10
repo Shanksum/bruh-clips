@@ -48,10 +48,12 @@
     <!-- Dark Mode Option Meta tag -->
     <meta name="color-scheme" content="dark light">
 
+    <script src="../js/process-video.js"></script>
+
     <title>bruh-clips | {%videoName%}</title>
 </head>
 
-<body>
+<body onload="processVideo()">
     <div class="d-grid gap-3 container">
         <div class="row">
             <div class="col d-flex justify-content-center pt-3">
@@ -69,7 +71,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col d-flex justify-content-center">
+            <div class="col d-flex justify-content-center" id="videoCol">
                 {%insertFile%}
             </div>
         </div>
@@ -90,7 +92,7 @@
             </div>
         </div>
         <div class="row">
-            <p style="text-align: center; font-weight: bold;">Expires (+/- 1h): {%expiryDate%}</p>
+            <p style="text-align: center; font-weight: bold;" id="status">Expires: {%expiryDate%} <br> (+/- 1h)</p>
         </div>
     </div>
 

@@ -122,7 +122,7 @@ document.getElementById("uploadForm").addEventListener("submit", async (event) =
     ajax.upload.onprogress = function (event) {
         // Update loaded x of n, round to MB with two decimals TODO: MB calculation is off/to large
         //document.getElementById("status").innerHTML = "Uploaded " + Math.round((event.loaded / 1000 / 1000 + Number.EPSILON) * 100) / 100 + " megabytes of " + Math.round((event.total / 1000 / 1000 + Number.EPSILON) * 100) / 100;
-        document.getElementById("status").innerHTML = "Uploaded " + (((event.loaded - cover.size) / 1024) / 1024).toFixed(2) + " megabytes of " + (((event.total - cover.size) / 1024) / 1024).toFixed(2);
+        document.getElementById("status").innerHTML = "Uploaded " + (((event.loaded - cover.size) / 1024) / 1024).toFixed(2) + " of " + (((event.total - cover.size) / 1024) / 1024).toFixed(2) + "mb";
 
         // Calculate percentage
         var percent = (event.loaded / event.total) * 100;
@@ -132,6 +132,9 @@ document.getElementById("uploadForm").addEventListener("submit", async (event) =
         bar.setAttribute("aria-valuenow", Math.round(percent));
         bar.setAttribute("style", "width: " + Math.round(percent) + "%");
         bar.innerHTML = Math.round(percent) + "%";
+        if(percent == 100) {
+            document.getElementById("status").innerHTML = "<strong>Please wait for file to be processed! Do not reload/refresh the page, you will be redirected.</strong>";
+        }
     }
 
     // Handle what happens on abort
@@ -147,7 +150,7 @@ document.getElementById("uploadForm").addEventListener("submit", async (event) =
     // Handle what happens on load
     ajax.onload = function (e) {
         if (ajax.status >= 200 && ajax.status <= 299) {
-            //console.log(ajax.responseText);
+            console.log(ajax.responseText);
             var response = JSON.parse(ajax.responseText);
             if (response.error) {
                 document.getElementById("status").innerHTML = "<b>Server-Side Errors:</b> <br>" + response.error + "<b> Please try to resolve the errors or contact us at info@bruh-clips.com";
